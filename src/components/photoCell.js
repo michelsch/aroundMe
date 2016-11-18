@@ -1,12 +1,13 @@
 import React from 'react';
 import LazyLoad from 'react-lazy-load';
 
+/*This component returns a lazily loaded single image*/
 const PhotoCell = (props) => {
     const photo = props.photo;
-    const url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`
+    const imgUrl = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
     return (
         <LazyLoad className="photoCell">
-            <img className="lazy fromURL" src={url}></img>
+            <img className="lazy fromURL" src={imgUrl}></img>
         </LazyLoad>
     );
 };

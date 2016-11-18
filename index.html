@@ -4,18 +4,18 @@
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLPwiWAjROXkOF18HtdbzqbHF5aWSEC7Q&libraries=places&callback=initAutocomplete"
-    async defer></script>
     <link href="https://fonts.googleapis.com/css?family=Lobster+Two|Oswald" rel="stylesheet">
   </head>
   <body>
     <div class="header">aroundMe</div>
     <div class="container"></div>
   </body>
-  <script src="/bundle.js"></script>
+    <script src="/bundle.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLPwiWAjROXkOF18HtdbzqbHF5aWSEC7Q&libraries=places&callback=initAutocomplete"
+    async defer></script>
       <script>
+      /*Code to provide Google autocomplete for addresses*/
       var autocomplete;
-
       function initAutocomplete() {
         // Create the autocomplete object, restricting the search to geographical
         // location types.
@@ -24,7 +24,7 @@
             {types: ['geocode']});
         autocomplete.addListener('place_changed', dispatchOnChangeEvent);
       }
-
+      //Treat autocomplete as an input event, which translates to onChange in React
        function dispatchOnChangeEvent() {
           var elem = document.getElementById('autocomplete');
           elem.dispatchEvent(new Event('input', { bubbles: true }));

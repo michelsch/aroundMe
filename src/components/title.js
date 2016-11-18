@@ -1,5 +1,6 @@
 import React from 'react';
 
+/*This component is a title including the address corresponding to imgs shown*/
 class Title extends React.Component {
 
     render() {
