@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PhotoGrid from './components/photoGrid.js'
-import SearchBar from './components/searchBar.js'
+import PhotoGrid from './components/photoGrid.js';
+import SearchBar from './components/searchBar.js';
+import Title from './components/title.js';
 
 //default user location, Mission District SF
-var defaultLocation = {geometry:{location:{lat:37.7664, lng:-122.4172}}};
+const defaultLocation = {geometry:{location:{lat:37.7664, lng:-122.4172}}};
+const defaultAddress = 'Mission District, San Francisco, CA, United States';
 
 /* The primary React component, which contains the search bar and the photo grid */
 class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {photos:[]};
+        this.state = {photos:[], address:defaultAddress};
     }
 
     fetchPhotos(_location) {
@@ -41,6 +43,7 @@ class App extends React.Component {
         return(
             <div>
                 <SearchBar onSearchTermChange={address => this.geocode(address)}/>
+                <Title address={this.state.address}/>
                 <PhotoGrid photos={this.state.photos}/>
             </div>
         );
@@ -54,8 +57,10 @@ class App extends React.Component {
                 return response.json()
                     .then((json) => {
                         if (json.status !== 'ZERO_RESULTS') {
-                            console.log(json.results[0]);
-                            this.fetchPhotos(json.results[0])
+                            //console.log(json.results[0]);
+                            const obj = json.results[0];
+                            this.setState({address:obj.formatted_address});
+                            this.fetchPhotos(obj);
                         }
                     });
             });
