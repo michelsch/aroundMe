@@ -33,7 +33,7 @@ class App extends React.Component {
     }
 
     //fetch photos from flickr in JSON format using an API key and a google geolocation
-    //use _location to avoid interference with window.location object
+    //use _location param name to avoid interference with window.location object
     fetchPhotos(_location) {
         const lat = _location.geometry.location.lat;
         const lng = _location.geometry.location.lng;
@@ -59,7 +59,8 @@ class App extends React.Component {
     //fetch a geolocation given a correctly formatted address string
     geocode(address) {
         const API_KEY = 'AIzaSyDLPwiWAjROXkOF18HtdbzqbHF5aWSEC7Q';
-        const API_ENDPOINT = `http://maps.googleapis.com/maps/api/geocode/json?address=${address}?key=${API_KEY}`;
+        const API_ENDPOINT = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`;
+        //console.log(API_ENDPOINT);
         fetch(API_ENDPOINT)
             .then(response => {
                 return response.json()
@@ -69,6 +70,7 @@ class App extends React.Component {
                             //console.log(json.results[0]);
                             //take first match
                             const obj = json.results[0];
+                            console.log(obj.formatted_address);
                             this.setState({address:obj.formatted_address});
                             this.fetchPhotos(obj);
                         }

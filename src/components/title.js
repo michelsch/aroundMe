@@ -5,6 +5,7 @@ class Title extends React.Component {
 
     render() {
         const titleString = `Around ${this.props.address}`;
+        console.log(titleString);
         return <div className="title"> {titleString}</div>;
     }
 }
